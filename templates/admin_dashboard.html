@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h3 class="fw-bold">Admin Dashboard</h3>
+<div>
+<a href="/add" class="btn btn-success me-2">➕ Add Product</a>
+<a href="/logout" class="btn btn-danger">Logout</a>
+</div>
+</div>
+
+
+<div class="card shadow-sm border-0">
+<div class="card-body p-0">
+<table class="table table-hover mb-0">
+<thead class="table-dark">
+<tr>
+<th>Title</th>
+<th>Category</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+{% for p in products %}
+<tr>
+<td>{{ p[1] }}</td>
+<td><span class="badge bg-secondary">{{ p[4] }}</span></td>
+<td>
+<a href="/edit/{{ p[0] }}" class="btn btn-sm btn-primary">Edit</a>
+<a href="/delete/{{ p[0] }}" class="btn btn-sm btn-danger"
+onclick="return confirm('Delete this product?')">Delete</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+
+
+{% endblock %}

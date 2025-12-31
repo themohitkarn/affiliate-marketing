@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- ========== SEO (Dynamic) ========== -->
+  <title>{% block title %}Daily Deals India{% endblock %}</title>
+
+  <meta name="description"
+        content="{% block meta_description %}Best Amazon deals and useful products curated for you. Buy directly from Amazon.{% endblock %}">
+
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph (WhatsApp / Instagram Preview) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Daily Deals India">
+  <meta property="og:title"
+        content="{% block og_title %}Daily Deals India{% endblock %}">
+  <meta property="og:description"
+        content="{% block og_description %}Best Amazon deals and curated products.{% endblock %}">
+  <meta property="og:image"
+        content="{% block og_image %}/static/og-default.png{% endblock %}">
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#212529">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- PWA -->
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="/" class="navbar-brand fw-bold">
+        🔥 Daily Deals India
+      </a>
+    </div>
+  </nav>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="flex-fill">
+    <div class="container my-4">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="mt-auto bg-dark text-light text-center py-3">
+    <div class="container">
+      <small>
+        © 2025 Daily Deals India ·  
+        <span class="d-block d-md-inline">
+          As an Amazon Associate, we earn from qualifying purchases.
+        </span>
+      </small>
+    </div>
+  </footer>
+
+  <!-- ========== JS ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- PWA Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/static/sw.js");
+    }
+  </script>
+
+</body>
+</html>

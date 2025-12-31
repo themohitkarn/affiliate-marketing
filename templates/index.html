@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{# ================= SEO ================= #}
+{% block title %}
+  {% if request.args.get('category') %}
+    {{ request.args.get('category') }} Deals | Daily Deals India
+  {% else %}
+    Best Amazon Deals | Daily Deals India
+  {% endif %}
+{% endblock %}
+
+{% block meta_description %}
+  {% if request.args.get('category') %}
+    Browse best {{ request.args.get('category') }} deals from Amazon. Curated useful products at Daily Deals India.
+  {% else %}
+    Discover best Amazon deals on gadgets, home, fashion and more. Curated products updated regularly.
+  {% endif %}
+{% endblock %}
+
+{% block og_title %}
+  {% if request.args.get('category') %}
+    {{ request.args.get('category') }} Deals | Daily Deals India
+  {% else %}
+    Best Amazon Deals | Daily Deals India
+  {% endif %}
+{% endblock %}
+
+{% block og_description %}
+  {% if request.args.get('category') %}
+    Best {{ request.args.get('category') }} products handpicked from Amazon.
+  {% else %}
+    Best Amazon deals and curated useful products.
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<!-- ========== HERO SECTION ========== -->
+<div class="p-4 p-md-5 mb-4 rounded-3 bg-dark text-light">
+  <div class="container-fluid py-3">
+    <h1 class="fw-bold">🔥 Daily Deals India</h1>
+    <p class="col-md-8 fs-6">
+      Handpicked useful products from Amazon.  
+      Buy with confidence. Updated regularly.
+    </p>
+  </div>
+</div>
+
+<!-- ========== CATEGORY FILTER ========== -->
+<div class="mb-4">
+  <a href="/" class="btn btn-outline-dark btn-sm me-2 mb-2">
+    All
+  </a>
+
+  {% for c in categories %}
+    <a href="/?category={{ c[0] }}"
+       class="btn btn-outline-primary btn-sm me-2 mb-2">
+      {{ c[0] }}
+    </a>
+  {% endfor %}
+</div>
+
+<!-- ========== PRODUCTS GRID ========== -->
+<div class="row g-4">
+{% if products %}
+  {% for p in products %}
+    <div class="col-sm-6 col-md-4">
+      <div class="card product-card h-100 border-0">
+
+        <img src="{{ p['image'] }}"
+             class="card-img-top"
+             alt="{{ p['title'] }}">
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">
+            <a href="/product/{{ p['id'] }}"
+               class="text-decoration-none text-dark">
+              {{ p['title'] }}
+            </a>
+          </h5>
+
+          <p class="card-text text-muted small">
+            {{ p['description'] }}
+          </p>
+
+          <span class="badge bg-secondary mb-2 align-self-start">
+            {{ p['category'] }}
+          </span>
+
+          <a href="/go/{{ p['id'] }}"
+             class="btn btn-warning fw-bold mt-auto">
+            Buy on Amazon
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      Products coming soon. Please check back later.
+    </div>
+  </div>
+{% endif %}
+</div>
+
+{% endblock %}
