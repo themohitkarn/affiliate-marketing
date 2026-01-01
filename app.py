@@ -1,9 +1,17 @@
 from flask import Flask, render_template, request, redirect, session, url_for
+import os
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+from init_db import init_db
+
 
 app = Flask(__name__)
-app.secret_key = "supersecretkey"   # change later in production
+app.secret_key = os.environ.get("SECRET_KEY", "fallback-secret")   # change later in production
+
+@app.before_first_request
+def setup_database():
+    init_db()
+
 
 
 # ======================
