@@ -8,9 +8,8 @@ from init_db import init_db
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "fallback-secret")   # change later in production
 
-@app.before_first_request
-def setup_database():
-    init_db()
+
+init_db()
 
 
 
